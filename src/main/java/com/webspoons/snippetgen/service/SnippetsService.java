@@ -34,6 +34,28 @@ public class SnippetsService {
             return snippet;
 
     }
+
+
+    public Snippets getSnippet(String snippetName) {
+
+       try {
+           for (Snippets snippets : snippetList) {
+               if (snippets.getName().equals(snippetName)) {
+                   if (LocalDateTime.now().isAfter(snippets.getExpiresAt())) {
+                       return null;
+                   } else {
+                       snippets.setExpiresAt(snippets.getExpiresAt().plusSeconds(30));
+                       return snippets;
+                   }
+               }
+           }
+           return null;
+       }catch (Exception e){
+           System.out.println(e.getMessage());
+       }
+       return null;
+
+    }
     public boolean isSnipplet(String snippetName) {
         return snippetList.stream().anyMatch(snippet -> snippet.getName().equals(snippetName));
     }
