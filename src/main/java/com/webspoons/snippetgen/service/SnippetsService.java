@@ -37,7 +37,7 @@ public class SnippetsService {
 
 
     public Snippets getSnippet(String snippetName) {
-
+        if (!isSnipplet(snippetName)) return null;
        try {
            for (Snippets snippets : snippetList) {
                if (snippets.getName().equals(snippetName)) {
@@ -55,6 +55,18 @@ public class SnippetsService {
        }
        return null;
 
+    }
+
+    public Snippets likeSnippet(String snippetName) {
+        if (!isSnipplet(snippetName)) return null;
+        for (Snippets snippet : snippetList) {
+            if (snippet.getName().equals(snippetName)) {
+                snippet.setLikes(snippet.getLikes() + 1);
+                snippet.setExpiresAt(snippet.getExpiresAt().plusSeconds(30));
+                return snippet;
+            }
+        }
+        return null;
     }
     public boolean isSnipplet(String snippetName) {
         return snippetList.stream().anyMatch(snippet -> snippet.getName().equals(snippetName));
