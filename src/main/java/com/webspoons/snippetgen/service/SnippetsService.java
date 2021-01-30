@@ -2,11 +2,13 @@ package com.webspoons.snippetgen.service;
 
 import com.webspoons.snippetgen.model.Snippets;
 import com.webspoons.snippetgen.model.SnippetsRequest;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class SnippetsService {
 
     private List<Snippets> snippetList = new ArrayList<>();
